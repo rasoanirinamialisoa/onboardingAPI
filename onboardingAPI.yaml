@@ -6,10 +6,17 @@ info:
   version: 1.0.11
 servers:
   - url: https://STD22026.com
+tags:
+  - name : students
+    description: Everything about your students
+  - name: teachers
+    description: Everything about your teachers
 paths:
   /students:
     get:
-      summary: Retrieve status information
+      tags:
+        - students
+      summary: Retrieve students
       responses:
         '200':
           description: Successful response
@@ -24,7 +31,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
     post:
-      summary: Update status information
+      tags :
+        - students
+      summary: Add new student
       requestBody:
         required: true
         content:
@@ -44,6 +53,90 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags :
+        - students
+      summary: Update student
+      description: Update status information with additional properties
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatusUpdateRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - students
+      summary: Delete student
+      description: Delete status information based on certain criteria
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /teachers:
+    get:
+      tags :
+        - teachers
+      summary: Retrieve teacher information
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeacherResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags :
+        - teachers
+      summary: Add new teacher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeacherRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeacherResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
 components:
   schemas:
     StatusResponse:
@@ -75,3 +168,62 @@ components:
         Birthday:
           type: string
           format: date
+    StatusUpdateRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+        Birthday:
+          type: string
+          format: date
+        additionalProperty:
+          type: string
+          description: Additional property for update
+    TeacherResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        first_name:
+          type: string
+          example: Tokimahery
+        last_name:
+          type: string
+          example: Ramarozaka
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
+    Course:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+        duration:
+          type: integer
+      example:
+        - name: Algo
+          code: prog1
+          duration: 20 heures
+        - name: Développement WEB
+          code: WEB1
+          duration: 28 heures
+    TeacherRequest:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
+
+
