@@ -32,3 +32,6 @@ This project is an OpenAPI 3.0 specification for the STD22026 API. The version i
 
 - Server URL: [https://STD22026.com](https://STD22026.com)
 
+## Link
+- Petstore URL : [https://petstore.swagger.io/?url=https://raw.githubusercontent.com/rasoanirinamialisoa/onboardingAPI/master/onboardingAPI.yaml)
+
