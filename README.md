@@ -2,7 +2,7 @@
 
 # 1.1 - Description OpenAPI 3.0: STD22026
 
-This project is an OpenAPI 3.0 specification for the STD22026 API. The version is 1.0.11. It provides endpoints to manage student information. The API allows retrieving student status information through a `GET` request and updating it via a `POST` request. The API responses include successful status information and internal server error details.
+This project is an OpenAPI 3.0 specification for the STD22026 API. The version is 1.0.11. It provides endpoints to manage student and teacher information.
 
 ## Endpoints
 
